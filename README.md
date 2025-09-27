@@ -73,8 +73,8 @@ Admins can view:
 
 **Design Guidelines:**
 - Clear, simple, and user-friendly interface.
-- Use **Bootstrap** or **Tailwind CSS** for styling.
-- Optional SPA with React/Angular/Vue for enhanced citizen dashboard experience.
+- Use **Bootstrap** for styling.
+
 
 ---
 
@@ -95,7 +95,6 @@ Admins can view:
 - **Backend:** Node.js, Express.js
 - **Frontend:** EJS Templates, Bootstrap/Tailwind CSS
 - **Database:** PostgreSQL
-- **Optional SPA:** React / Angular / Vue
 
 ---
 
@@ -122,5 +121,6 @@ Visit http://localhost:3000 to access the portal.
 
 
 ##  Deployed (Render)
+
 
 [🔗 [Open live demo — agency-website-flame.vercel.app](https://agency-website-flame.vercel.app/)]

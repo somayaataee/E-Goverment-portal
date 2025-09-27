@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>login</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="container auth-container">
+    <div class="auth-card">
+      <h1 class="auth-title">Create an Account</h1>
+
+      <% if (typeof error !== "undefined") { %>
+        <div class="alert alert-error"><%= error %></div>
+      <% } %>
+      <% if (typeof message !== "undefined") { %>
+        <div class="alert alert-success"><%= message %></div>
+      <% } %>
+
+      <form action="/auth/register" method="POST" class="form">
+        <div class="form-group">
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" required placeholder="John Doe" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input id="email" name="email" type="email" required placeholder="you@example.com" />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" required placeholder="••••••••" />
+        </div>
+
+        <div class="form-group">
+          <label for="role">Role</label>
+          <select id="role" name="role">
+            <option value="citizen" selected>Citizen</option>
+            <option value="officer">Officer</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="departmentWrap" style="display:none;">
+          <label for="department_id">Department ID (optional for Officer/Admin)</label>
+          <input id="department_id" name="department_id" type="number" placeholder="e.g. 1" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Sign up</button>
+      </form>
+
+      <p class="auth-alt">
+        Already have an account?
+        <a href="/auth/login">Sign in</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const role = document.getElementById('role');
+    const dep = document.getElementById('departmentWrap');
+    const toggleDep = () => {
+      dep.style.display = (role.value === 'officer' || role.value === 'admin') ? 'block' : 'none';
+    };
+    role.addEventListener('change', toggleDep);
+    toggleDep();
+  </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #1A1F71;
+      color: #fff;
+      margin:0;
+       padding:0;
+    }
+    .container {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 40px 15px;
+    }
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+    .dashboard-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    .welcome-msg {
+      font-size: 1.2rem;
+      background-color: #FF6F00;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-weight: 600;
+      color:#fff;
+    }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .col-md-3 {
+      flex: 1 1 calc(25% - 20px);
+      min-width: 200px;
+    }
+    .card {
+      background-color: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(248, 171, 5, 0.2);
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    .card h3 { 
+      color: black;
+      margin:0 0 10px; font-size:1.1rem;
+     }
+    .btn {
+      border-radius: 10px;
+      font-weight: 600;
+      padding: 10px 16px;
+      margin-right: 10px;
+      text-decoration: none;
+      color: #fff;
+    }
+    .btn-primary {
+       background: #ff7f50;
+       border: none;
+       }
+    .btn-info {
+       background: #ff7f50;
+       border: none;
+       color: #043463;
+       }
+    .btn-success { 
+      background: #ff7f50;
+      border: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="dashboard-header">
+      <h2>Admin Dashboard</h2>
+      <div class="welcome-msg">
+        Welcome, <%= typeof user !== 'undefined' && user ? user.name : 'Admin' %>!
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card">
+          <h3>Total Users</h3>
+          <p><%= stats.totalUsers %></p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card">
+          <h3>Total Services</h3>
+          <p><%= stats.totalServices %></p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card">
+          <h3>Total Requests</h3>
+          <p><%= stats.totalRequests %></p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card">
+          <h3>Approved / Rejected</h3>
+          <p><%= stats.approved %> / <%= stats.rejected %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <a href="/admin/users" class="btn btn-primary">Manage Users</a>
+      <a href="/admin/departments" class="btn btn-info">Manage Departments</a>
+      <a href="/admin/services" class="btn btn-success">Manage Services</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply for Service</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+       background-color: #f8f9fa;
+       }
+    .card {
+       margin-top: 50px;
+       border-radius: 12px;
+       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+     }
+    .card-header {
+     background-color: #1A1F71;
+     color: white;
+     font-weight: bold;
+     font-size: 1.3rem;
+   }
+    .btn-primary {
+     background-color: #1A1F71;
+     border: none;
+    }
+    .btn-primary:hover {
+     background-color: #1A1F71;
+   }
+    label {
+     font-weight: 500;
+   }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header text-center">
+            Apply for a Service
+          </div>
+          <div class="card-body">
+
+            <% if (typeof error !== 'undefined' && error) { %>
+              <div class="alert alert-danger"><%= error %></div>
+            <% } %>
+
+            <form action="/citizen/apply" method="POST">
+              <div class="mb-3">
+                <label for="service_id" class="form-label">Select Service</label>
+                <% const sampleServices = [
+                {id:1, name:'Passport Renewal', description:'Renew your passport quickly', fee:50},
+                {id:2, name:'Business License', description:'Apply for business license online', fee:120},
+                {id:3, name:'Property Registration', description:'Register your property easily', fee:80},
+                {id:4, name:'Utility Connection', description:'Request water/electricity connection', fee:30},
+                {id:5, name:'Birth Certificate', description:'Request certified birth documents', fee:20},
+                {id:6, name:'Marriage Certificate', description:'Apply for marriage certificate', fee:25},
+                {id:7, name:'Vehicle Registration', description:'Register vehicles online', fee:60},
+                {id:8, name:'Business Permit', description:'Get required permits for business', fee:100}
+              ]; %>
+              
+              <select name="service_id" id="service_id" class="form-select" required>
+                <option value="" disabled selected>-- Choose a Service --</option>
+                <% sampleServices.forEach(service => { %>
+                  <option value="<%= service.id %>"><%= service.name %> - Fee: $<%= service.fee %></option>
+                <% }) %>
+              </select>
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Submit Request</button>
+              </div>
+            </form>
+
+            <hr>
+            <div class="text-center">
+              <a href="/citizen/dashboard" class="btn btn-secondary btn-sm">Back to Dashboard</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

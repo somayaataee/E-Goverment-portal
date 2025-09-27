@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Officer Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+     background: #f0f4f8;
+     font-family: 'Inter', sans-serif; 
+  }
+    .dashboard-header {
+     display:flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-bottom: 2rem;
+   }
+    .welcome-msg { 
+    font-size:1.3rem;
+   color: #ff6600; 
+  font-weight:600; 
+}
+    .stat-card {
+     border-radius: 12px;
+     padding:1.2rem;
+     color:#fff;
+   }
+    .stat-total {
+     background:#FF6F00;
+   }
+    .stat-pending {
+     background:#FF6F00;
+   }
+    .stat-approved {
+     background: #FF6F00;
+   }
+    .stat-rejected {
+     background:#FF6F00;
+   }
+    table {
+     background:#fff;
+     border-radius:10px;
+     overflow:hidden;
+   }
+    th {
+     background:#1e3a8a;
+     color:#fff;
+   }
+    td {
+     vertical-align: middle; 
+  }
+    .btn-primary {
+     background: #1e3a8a;
+     border:none; 
+  }
+    .btn-primary:hover {
+     background:#3b82f6;
+   }
+    .btn-view { 
+    background:#f97316; 
+    border:none;
+ }
+    .btn-view:hover {
+     background:#fb923c;
+   }
+    .container{
+      background-color: #1e3a8a;
+    }
+    .dashboard-header{
+      color: #f97316;
+    }
+  </style>
+</head>
+<body class="container my-5">
+  <div class="dashboard-header">
+    <h2>Officer Dashboard</h2>
+    <div class="welcome-msg">Welcome, <%= officer.name %></div>
+  </div>
+
+  <div class="row g-3 mb-4">
+    <div class="col-md-3">
+      <div class="stat-card stat-total text-center">
+        <h5>Total Requests</h5>
+        <p class="fs-4"><%= stats.totalrequests %></p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="stat-card stat-pending text-center">
+        <h5>Pending</h5>
+        <p class="fs-4"><%= stats.pending %></p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="stat-card stat-approved text-center">
+        <h5>Approved</h5>
+        <p class="fs-4"><%= stats.approved %></p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="stat-card stat-rejected text-center">
+        <h5>Rejected</h5>
+        <p class="fs-4"><%= stats.rejected %></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card p-3 mb-4">
+    <h3>Requests for Your Department</h3>
+    <div class="table-responsive">
+      <table class="table table-bordered mt-3">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Citizen</th>
+            <th>Service</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if(requests.length === 0){ %>
+            <tr><td colspan="6" class="text-center">No requests found.</td></tr>
+          <% } else { %>
+            <% requests.forEach(req => { %>
+              <tr>
+                <td><%= req.id %></td>
+                <td><%= req.citizen_name %></td>
+                <td><%= req.service_name %></td>
+                <td><%= req.status %></td>
+                <td><%= new Date(req.created_at).toLocaleDateString() %></td>
+                <td>
+                  <a href="/officer/request/<%= req.id %>" class="btn btn-sm btn-view">View</a>
+                </td>
+              </tr>
+            <% }) %>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+</html>

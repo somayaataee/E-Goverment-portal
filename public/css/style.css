@@ -1,0 +1,476 @@
+/* ==========================
+   GENERAL STYLES
+========================== */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #1A1F71; 
+  background-color: #ffffff; 
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  transition: all 0.3s ease;
+  background-color: #FF6F00;
+  padding: 10px;
+  border-radius: 29px;
+  color: white;
+ 
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FF6F00;
+  border-radius: 10px;
+}
+/* --home image-- */
+.home-image{
+  height: 100%;
+  width: 50%;
+  border-radius: 20px;
+}
+/* ==========================
+   NAVBAR
+========================== */
+.navbar-glass {
+  background-color: rgba(26, 31, 113, 0.95); 
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.navbar-brand .brand-mark {
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  color: #FF6F00;
+}
+.navbar-brand {
+  background-color: transparent;
+}
+.navbar-brand a{
+  color: transparent;
+  border: none;
+}
+.navbar-brand .brand-text {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.navbar-nav .nav-link {
+  color: #ffffff;
+  margin-right: 1rem;
+  font-weight: 500;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #FF6F00;
+}
+
+.navbar-nav .btn-primary,
+.navbar-nav .btn-outline-primary {
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.navbar-nav .btn-primary {
+  background-color: #FF6F00; 
+  border-color: #FF6F00;
+}
+
+.navbar-nav .btn-primary:hover {
+  background-color: #e65c00;
+  border-color: #e65c00;
+}
+
+.navbar-nav .btn-outline-primary {
+  color: #FF6F00; 
+  border-color: #FF6F00;
+}
+
+.navbar-nav .btn-outline-primary:hover {
+  background-color: #FF6F00;
+  color: #fff;
+}
+
+/* ==========================
+   HERO SECTION
+========================== */
+.hero-section {
+  padding: 6rem 0;
+  background: #1A1F71;
+  color: #ffffff;
+  text-align: center;
+  position: relative;
+}
+
+.hero-section .btn-primary,
+.hero-section .btn-outline-secondary {
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.hero-section .btn-primary {
+  background-color: #FF6F00; 
+  border-color: #FF6F00;
+}
+
+.hero-section .btn-primary:hover {
+  background-color: #e65c00; 
+}
+
+.hero-section .btn-outline-secondary {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.hero-section .btn-outline-secondary:hover {
+  background-color: #ffffff;
+  color: #1A1F71; 
+}
+
+/* ==========================
+   SECTION TITLES
+========================== */
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1A1F71; 
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: #FF6F00; 
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+/* ==========================
+   FEATURE & SERVICE CARDS
+========================== */
+.feature-card,
+.service-card,
+.card {
+  background-color: #ffffff; 
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.py-5{
+  padding-top: 7rem !important;
+}
+
+.feature-card:hover,
+.service-card:hover,
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+.feature-card .icon,
+.feature-card i {
+  color: #FF6F00; 
+}
+
+.feature-card h5,
+.service-card .card-title {
+  color: #1A1F71; 
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.feature-card p,
+.service-card .card-text,
+.card p {
+  color: #1A1F71;
+  margin-top: 0.5rem;
+}
+
+.service-card .btn-primary,
+.btn-primary {
+  background-color: #FF6F00; 
+  border: none;
+  color: #fff;
+  font-weight: 600;
+}
+
+.service-card .btn-primary:hover,
+.btn-primary:hover {
+  background-color: #e65c00; 
+  box-shadow: 0 6px 16px rgba(230,92,0,0.4);
+}
+
+/* ==========================
+   LOGIN & REGISTER FORMS
+========================== */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #1A1F71; 
+}
+
+.auth-card,
+.form-container {
+  background-color: #ffffff; 
+  padding: 45px 35px;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+  align-items: center;
+  justify-self: center;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.auth-title,
+.form-container h1,
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2rem;
+  color: #1A1F71; 
+}
+.form-group,
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+.form-group label,
+.input-group label {
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #1A1F71;
+}
+
+.form-group input,
+.form-group select,
+.input-group input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+.form-group input:focus,
+.form-group select:focus,
+.input-group input:focus {
+  border-color: #FF6F00; 
+  box-shadow: 0 0 8px #FF6F00;
+  outline: none;
+}
+
+/* Buttons */
+button,
+.btn,
+.form-container button,
+.auth-card .btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  background-color: #FF6F00; 
+  color: #fff;
+}
+
+button:hover,
+.btn:hover,
+.form-container button:hover,
+.auth-card .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(230,92,0,0.4);
+}
+/* ---------citizen/applay------- */
+body { 
+  background-color: #f8f9fa;
+ }
+    .card {
+       margin-top: 50px; 
+       border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      }
+    .card-header { 
+      background-color: #1A1F71; 
+      color: white;
+       font-weight: bold;
+       font-size: 1.3rem; 
+      }
+    .btn-primary { 
+      background-color: #1A1F71; 
+      border: none;
+     }
+    .btn-primary:hover {
+       background-color: #1A1F71;
+       }
+    label {
+       font-weight: 500;
+       }
+/* ------------citizen/dashboard------------- */
+body {
+  background-color: #f2f4f7;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+/* --- Welcome Header --- */
+.welcome {
+  background-color: #004085;
+  color: #fff;
+  padding: 25px 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.welcome h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+.welcome p {
+  margin: 5px 0 0 0;
+  font-size: 1rem;
+}
+
+/* --- Buttons --- */
+.btn-custom {
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+
+/* --- Table --- */
+table {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+th {
+  background-color: #004085;
+  color: #fff;
+}
+
+/* --- Notifications --- */
+.notifications {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  margin-top: 20px;
+}
+.notifications li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+.notifications li:last-child {
+  border-bottom: none;
+}
+.btn{
+  background-color: #FF6F00;
+  color: white;
+  border: 1px solid white;
+  padding: 10px;
+}
+.btn:hover{
+  background-color: white;
+  border:1px solid #FF6F00;
+  color: #FF6F00;
+}
+
+
+/* ==========================
+   FOOTER
+========================== */
+.footer {
+  background-color: #1A1F71; 
+  color: #ffffff;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.footer a {
+  color: #FF6F00;
+}
+
+.footer a:hover {
+  color: #ffffff;
+}
+/* login admin */
+.bodi{
+  background-color: #1A1F71;
+}
+.login-container{
+  margin: 15% 35%;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+
+}
+@keyframes fadeIn {
+  from {opacity:0; transform: translateY(-20px);}
+  to {opacity:1; transform: translateY(0);}
+}
+/* login main */
+.login-body{
+  background-color: #1A1F71;
+  color: white;
+  text-align: center;
+}
+/* ==========================
+   RESPONSIVE
+========================== */
+@media (max-width: 768px) {
+  .hero-section { padding: 4rem 1rem; }
+  header h1 { font-size: 2rem; }
+  .service-card .card-title { font-size: 1.15rem; }
+}
+
+@media (max-width: 480px) {
+  .form-container,
+  .auth-card { padding: 2rem 1.5rem; }
+  .form-container h1,
+  .auth-title { font-size: 1.7rem; }
+}
+
+/* ==========================
+   ANIMATIONS
+========================== */
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) }
+  50% { transform: translateY(-20px) }
+  100% { transform: translateY(1px) }
+}

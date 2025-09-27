@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citizen Login</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="form-container  ">
+    <h2>Citizen Login</h2>
+    <form action="/citizen/login" method="POST" class="form">
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="Enter your email" required>
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="Enter password" required>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+    <% if (typeof error !== "undefined") { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+    <p>Don't have an account? <a href="/citizen/register">Register</a></p>
+  </div>
+</body>
+</html>

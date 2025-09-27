@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Notifications</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="container mt-5">
+  <h2>Your Notifications</h2>
+  <ul class="list-group">
+    <% notifications.forEach(n => { %>
+      <li class="list-group-item <%= n.is_read ? '' : 'fw-bold' %>">
+        <%= n.message %> - <%= n.created_at.toLocaleDateString() %>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>

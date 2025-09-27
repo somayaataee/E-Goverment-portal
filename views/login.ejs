@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="login-body">
+  <header>
+    <h1><%= title %></h1>
+  </header>
+
+  <main>
+    <form action="/login" method="POST" class="form-container">
+      <h2> Login</h2>
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="Enter your email" required>
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="Enter your password" required>
+      </div>
+
+     
+      <div class="input-group">
+        <label for="password">role</label>
+        <select  name="role" required>
+          <option value="admin">admin</option>
+          <option value="officer">officer</option>
+          <option value="citizen">citizen</option>
+        </select>      </div>
+      
+      <button type="submit" class="btn btn-login w-100 py-2">submit</button>
+
+      
+    </form>
+  </main>
+</body>
+</html>

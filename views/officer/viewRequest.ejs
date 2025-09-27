@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Request Details</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="container mt-5">
+  
+  <h2>Request #<%= request.id %> Details</h2>
+  <p><strong>Citizen:</strong> <%= request.citizen_name %> (<%= request.citizen_email %>)</p>
+  <p><strong>Service:</strong> <%= request.service_name %></p>
+  <p><strong>Fee:</strong> $<%= request.fee %></p>
+  <p><strong>Status:</strong> <%= request.status %></p>
+  <p><strong>Created At:</strong> <%= request.created_at.toLocaleDateString() %></p>
+
+  <h4>Documents</h4>
+  <ul>
+    <% documents.forEach(doc => { %>
+      <li><a href="/<%= doc.file_path.replace('public/', '') %>" target="_blank"><%= doc.file_name %></a></li>
+    <% }) %>
+  </ul>
+
+  <form action="/officer/request/<%= request.id %>" method="POST">
+    <select name="status" class="form-control mb-2" required>
+      <option value="">Select Status</option>
+      <option value="Approved">Approve</option>
+      <option value="Rejected">Reject</option>
+    </select>
+    <button type="submit" class="btn btn-success">Update Status</button>
+  </form>
+  <h3>Uploaded Documents</h3>
+  <% if (documents.length > 0) { %>
+    <ul>
+      <% documents.forEach(doc => { %>
+        <li>
+          <a href="/<%= doc.file_path.replace('public/', '') %>" target="_blank">
+            <%= doc.file_name %>
+          </a>
+          - <small><%= new Date(doc.uploaded_at).toLocaleString() %></small>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No documents uploaded yet.</p>
+  <% } %>
+  
+  <a href="/officer/dashboard" class="btn btn-secondary mt-3">Back to Dashboard</a>
+</body>
+</html>

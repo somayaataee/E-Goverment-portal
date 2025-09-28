@@ -10,7 +10,7 @@ const session = require("express-session");
 
 app.use(
   session({
-    secret: "my-secret-key",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -99,3 +99,4 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`✅Server running on port ${PORT}`);
 });
+

@@ -1,11 +1,11 @@
-const pool = require("./db"); 
+
 const dotenv = require("dotenv");
 const express = require("express");
 const app = express();
 const path = require("path");
 dotenv.config();
-const cookieParser = require("cookie-parser");
 
+const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
 app.use(
@@ -97,10 +97,11 @@ app.get("/how", (req, res) => {
   res.render("how", { user });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`✅Server running on port ${PORT}`);
 });
+
 
 
 

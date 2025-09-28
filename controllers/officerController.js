@@ -1,7 +1,7 @@
+
 const pool = require("../config/db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-
 
 exports.showLoginForm = (req, res) => {
   res.render("officer/officerLogin", { error: null });
@@ -14,22 +14,48 @@ exports.loginOfficer = async (req, res) => {
       "SELECT * FROM users WHERE email=$1 AND role='officer'",
       [email]
     );
+
     const officer = result.rows[0];
-    if (!officer) return res.render("officer/officerLogin", { error: "Password or email is incorrect." });
+    if (!officer) return res.render("officer/officerLogin", { error: "Email or password is incorrect." });
 
     const isMatch = await bcrypt.compare(password, officer.password);
-    if (!isMatch) return res.render("officer/officerLogin", { error: "Password or email is incorrect." });
+    if (!isMatch) return res.render("officer/officerLogin", { error: "Email or password is incorrect." });
+
 
     const token = jwt.sign(
-      { id: officer.id, name: officer.name, role: officer.role, department_id: officer.department_id || null },
-      process.env.JWT_SECRET,
+      {
+        id: officer.id,
+        name: officer.name,
+        role: officer.role,
+        department_id: officer.department_id || null
+      },
+      process.env.JWT_SECRET || "CHANGE_THIS_SECRET",
       { expiresIn: "2h" }
     );
 
-    res.cookie("token", token, { httpOnly: true, maxAge: 2 * 60 * 60 * 1000 });
-    res.redirect("/officer/dashboard");
+    
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false, 
+      sameSite: "lax",
+      maxAge: 2 * 60 * 60 * 1000
+    });
+
+ 
+    if (req.session) {
+      req.session.user = {
+        id: officer.id,
+        role: officer.role,
+        name: officer.name,
+        department_id: officer.department_id || null
+      };
+      req.session.officerId = officer.id;
+    }
+
+    return res.redirect("/officer/dashboard");
+
   } catch (err) {
-    console.error(err);
+    console.error("Officer login error:", err);
     res.status(500).send("Server Error");
   }
 };
@@ -39,7 +65,6 @@ exports.dashboard = async (req, res) => {
   try {
     const officer = req.user;
 
- 
     const statsResult = await pool.query(`
       SELECT 
         COUNT(*) AS "totalRequests",
@@ -50,9 +75,9 @@ exports.dashboard = async (req, res) => {
       JOIN services s ON r.service_id = s.id
       WHERE s.department_id = $1
     `, [officer.department_id]);
+
     const stats = statsResult.rows[0];
 
-   
     const requestsResult = await pool.query(`
       SELECT r.id, u.name AS citizen_name, s.name AS service_name, r.status, r.created_at
       FROM requests r
@@ -61,11 +86,12 @@ exports.dashboard = async (req, res) => {
       WHERE s.department_id = $1
       ORDER BY r.created_at DESC
     `, [officer.department_id]);
+
     const requests = requestsResult.rows;
 
     res.render("officer/officerDashboard", { officer, stats, requests });
   } catch (err) {
-    console.error(err);
+    console.error("Officer dashboard error:", err);
     res.status(500).send("Server Error");
   }
 };
@@ -96,7 +122,7 @@ exports.viewRequest = async (req, res) => {
 
     res.render("officer/viewRequest", { request, documents });
   } catch (err) {
-    console.error(err);
+    console.error("View request error:", err);
     res.status(500).send("Server Error");
   }
 };
@@ -122,7 +148,7 @@ exports.updateRequestStatus = async (req, res) => {
 
     res.redirect("/officer/dashboard");
   } catch (err) {
-    console.error(err);
+    console.error("Update request status error:", err);
     res.status(500).send("Server Error");
   }
 };

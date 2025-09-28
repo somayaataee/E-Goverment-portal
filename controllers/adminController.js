@@ -1,10 +1,13 @@
+
 const pool = require("../config/db");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
 
 exports.showLogin = (req, res) => {
-  res.render("admin/login"); 
+  res.render("admin/login", { error: null });
 };
 
-const bcrypt = require("bcrypt");
 
 exports.postLogin = async (req, res) => {
   const { email, password } = req.body;
@@ -14,29 +17,44 @@ exports.postLogin = async (req, res) => {
       [email]
     );
 
-    console.log("Email:", email, "Password:", password);
-    console.log("Query result:", result.rows);
-
     const admin = result.rows[0];
     if (!admin) {
-      return res.render("admin/login", { error: "Not found user !" });
+      return res.render("admin/login", { error: "User not found!" });
     }
 
     const validPassword = await bcrypt.compare(password, admin.password);
     if (!validPassword) {
-      return res.render("admin/login", { error: "inccorect password !" });
+      return res.render("admin/login", { error: "Incorrect password!" });
     }
 
+   
+    const token = jwt.sign(
+      { id: admin.id, role: admin.role, name: admin.name },
+      process.env.JWT_SECRET || "CHANGE_THIS_SECRET",
+      { expiresIn: "1d" }
+    );
 
-    req.session.adminId = admin.id;
-    res.redirect("/admin/dashboard");
+    
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false, // لوکال تست: false | production: true
+      sameSite: "lax",
+      maxAge: 24 * 60 * 60 * 1000
+    });
+
+    
+    if (req.session) {
+      req.session.user = { id: admin.id, role: admin.role, name: admin.name };
+      req.session.adminId = admin.id; 
+    }
+
+    return res.redirect("/admin/dashboard");
+
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Server Error");
+    console.error("Admin login error:", err);
+    return res.status(500).send("Server Error");
   }
 };
-
-
 
 exports.dashboardStats = async (req, res) => {
   try {
@@ -60,6 +78,7 @@ exports.dashboardStats = async (req, res) => {
     res.status(500).send("Server Error");
   }
 };
+
 
 exports.getUsers = async (req, res) => {
   try {
@@ -86,18 +105,11 @@ exports.addDepartment = async (req, res) => {
   }
 };
 
+
 exports.getDepartments = async (req, res) => {
   try {
-    const result = await pool.query(`
-      SELECT id, name FROM departments ORDER BY id ASC
-    `);
-
-   
-    const departments = result.rows.map(dep => ({
-      id: dep.id,
-      name: dep.name
-    }));
-
+    const result = await pool.query(`SELECT id, name FROM departments ORDER BY id ASC`);
+    const departments = result.rows.map(dep => ({ id: dep.id, name: dep.name }));
     res.render("admin/departments", { departments });
   } catch (err) {
     console.error("Error fetching departments:", err);
@@ -105,14 +117,9 @@ exports.getDepartments = async (req, res) => {
   }
 };
 
+
 exports.getServices = async (req, res) => {
   try {
-    if (!pool) {
-      console.error("Database pool is not defined!");
-      return res.status(500).send("Database connection error");
-    }
-
- 
     const query = `
       SELECT s.id AS service_id,
              s.name AS service_name,
@@ -125,7 +132,6 @@ exports.getServices = async (req, res) => {
 
     const result = await pool.query(query);
 
-
     const services = result.rows.map(row => ({
       id: row.service_id,
       name: row.service_name,
@@ -133,7 +139,6 @@ exports.getServices = async (req, res) => {
       department_name: row.department_name
     }));
 
-   
     res.render("admin/services", { services });
 
   } catch (err) {
@@ -141,5 +146,3 @@ exports.getServices = async (req, res) => {
     res.status(500).send("Server Error: " + err.message);
   }
 };
-
-

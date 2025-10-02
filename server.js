@@ -9,7 +9,7 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
 
-app.set('trust proxy', 1); // خیلی مهم روی سرویس‌هایی مثل Render
+app.set('trust proxy', 1); 
 
 app.use(session({
   secret: process.env.SESSION_SECRET || 'dev-secret',
@@ -17,7 +17,7 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production', // در محيط توسعه false باشه
+    secure: process.env.NODE_ENV === 'production',
     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     maxAge: 24 * 60 * 60 * 1000
   }
@@ -103,6 +103,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`✅Server running on port ${PORT}`);
 });
+
 
 
 

@@ -103,7 +103,7 @@ Admins can view:
 ### 1. Clone the repository
 ```bash
 git clone <repository-url>
-cd e-gov-portal
+cd E-Goverment-portal
 
 ```
 Visit http://localhost:3000 to access the portal.
@@ -124,4 +124,5 @@ Visit http://localhost:3000 to access the portal.
 
 
 [🔗 [Open live demo — https://e-goverment-portal-1.onrender.com](https://e-goverment-portal-1.onrender.com/)]
+
 

@@ -8,18 +8,20 @@ dotenv.config();
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET ,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      secure: true,     
-      sameSite: "none",  
-      maxAge: 1000 * 60 * 60 
-    },
-  })
-);
+
+app.set('trust proxy', 1); // خیلی مهم روی سرویس‌هایی مثل Render
+
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'dev-secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production', // در محيط توسعه false باشه
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    maxAge: 24 * 60 * 60 * 1000
+  }
+}));
 app.use(cookieParser());
 
 const authRoutes = require("./routes/authRoutes");
@@ -101,6 +103,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`✅Server running on port ${PORT}`);
 });
+
 
 
 
